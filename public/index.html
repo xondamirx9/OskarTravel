@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oskar Travel</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-o">O</span>
+      <span class="logo-text" id="nav-sitename">OSKAR TRAVEL</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#hero">Главная</a></li>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#tours">Туры</a></li>
+      <li><a href="#gallery">Фото</a></li>
+      <li><a href="#videos">Видео</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <button class="burger" id="burger">&#9776;</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-logo">
+      <span class="hero-o">O</span>
+    </div>
+    <h1 id="hero-title">OSKAR TRAVEL</h1>
+    <p class="hero-subtitle" id="hero-subtitle">Откройте мир вместе с нами</p>
+    <p class="hero-desc" id="hero-desc">Лучшие туры по всему миру. Незабываемые путешествия, комфорт и профессиональный сервис.</p>
+    <a href="#tours" class="btn btn-primary" id="hero-btn">Наши туры</a>
+  </div>
+  <div class="scroll-down"><span></span></div>
+</section>
+
+<!-- About -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="section-header">
+      <h2 id="about-title">О нас</h2>
+      <div class="divider"></div>
+    </div>
+    <p class="about-desc" id="about-desc"></p>
+    <div class="features-grid" id="features-grid"></div>
+    <div class="stats-grid" id="stats-grid"></div>
+  </div>
+</section>
+
+<!-- Tours -->
+<section class="section tours-section" id="tours">
+  <div class="container">
+    <div class="section-header">
+      <h2>Наши туры</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="tours-grid" id="tours-grid"></div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="section gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <h2 id="gallery-title">Фотогалерея</h2>
+      <p class="section-subtitle" id="gallery-subtitle">Вдохновитесь нашими лучшими направлениями</p>
+      <div class="divider"></div>
+    </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <p class="no-content">Фотографии скоро появятся</p>
+    </div>
+  </div>
+</section>
+
+<!-- Videos -->
+<section class="section videos-section" id="videos">
+  <div class="container">
+    <div class="section-header">
+      <h2 id="videos-title">Видеогалерея</h2>
+      <p class="section-subtitle" id="videos-subtitle">Посмотрите на путешествия глазами наших клиентов</p>
+      <div class="divider"></div>
+    </div>
+    <div class="videos-grid" id="videos-grid">
+      <p class="no-content">Видео скоро появятся</p>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="section reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header">
+      <h2>Отзывы клиентов</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="reviews-grid" id="reviews-grid"></div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2 id="contact-title">Контакты</h2>
+      <p class="section-subtitle" id="contact-subtitle">Свяжитесь с нами любым удобным способом</p>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info" id="contact-info"></div>
+      <div class="contact-form">
+        <h3>Задайте вопрос</h3>
+        <form id="contact-form">
+          <input type="text" placeholder="Ваше имя" required>
+          <input type="tel" placeholder="Телефон" required>
+          <input type="text" placeholder="Куда хотите поехать?">
+          <textarea placeholder="Ваш вопрос или пожелания" rows="4"></textarea>
+          <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-o">O</span>
+        <span id="footer-sitename">OSKAR TRAVEL</span>
+      </div>
+      <p>© <span id="year"></span> Oskar Travel. Все права защищены.</p>
+      <a href="/admin.html" class="admin-link">Админ</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+  <button class="lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+  <img src="" alt="" id="lightbox-img">
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

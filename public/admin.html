@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oskar Travel — Админ панель</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-screen" id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <span class="logo-o">O</span>
+      <span>OSKAR TRAVEL</span>
+    </div>
+    <h2>Админ панель</h2>
+    <form id="login-form">
+      <input type="password" id="login-password" placeholder="Пароль" required>
+      <button type="submit" class="btn-primary">Войти</button>
+    </form>
+    <p class="login-error" id="login-error"></p>
+  </div>
+</div>
+
+<!-- Admin App -->
+<div class="admin-app" id="admin-app" style="display:none">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-o">O</span>
+      <span>ADMIN</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="dashboard">📊 Дашборд</a>
+      <a href="#" class="nav-item" data-section="hero">🏠 Главная страница</a>
+      <a href="#" class="nav-item" data-section="about">ℹ️ О нас</a>
+      <a href="#" class="nav-item" data-section="tours">✈️ Туры</a>
+      <a href="#" class="nav-item" data-section="gallery">📷 Фотогалерея</a>
+      <a href="#" class="nav-item" data-section="videos">🎥 Видеогалерея</a>
+      <a href="#" class="nav-item" data-section="reviews">⭐ Отзывы</a>
+      <a href="#" class="nav-item" data-section="contact">📞 Контакты</a>
+      <a href="#" class="nav-item" data-section="settings">⚙️ Настройки</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/" target="_blank" class="view-site">🌐 Открыть сайт</a>
+      <button onclick="logout()" class="logout-btn">Выйти</button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="admin-main">
+    <div class="topbar">
+      <button class="burger-admin" onclick="toggleSidebar()">☰</button>
+      <h1 class="topbar-title" id="topbar-title">Дашборд</h1>
+      <div class="topbar-right">
+        <span class="save-status" id="save-status"></span>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <section class="admin-section active" id="section-dashboard">
+      <div class="welcome-card">
+        <h2>Добро пожаловать в панель управления Oskar Travel!</h2>
+        <p>Здесь вы можете управлять всем контентом вашего сайта: редактировать тексты, добавлять фото и видео, управлять турами и отзывами.</p>
+      </div>
+      <div class="dash-grid" id="dash-stats"></div>
+      <div class="quick-links">
+        <h3>Быстрые действия</h3>
+        <div class="quick-grid">
+          <button class="quick-btn" onclick="showSection('gallery')">📷 Добавить фото</button>
+          <button class="quick-btn" onclick="showSection('videos')">🎥 Добавить видео</button>
+          <button class="quick-btn" onclick="showSection('tours')">✈️ Добавить тур</button>
+          <button class="quick-btn" onclick="showSection('reviews')">⭐ Добавить отзыв</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero -->
+    <section class="admin-section" id="section-hero">
+      <div class="card">
+        <h2>Главная страница (Hero)</h2>
+        <form id="hero-form">
+          <div class="form-group">
+            <label>Заголовок</label>
+            <input type="text" name="title" id="hero-title-input">
+          </div>
+          <div class="form-group">
+            <label>Подзаголовок</label>
+            <input type="text" name="subtitle" id="hero-subtitle-input">
+          </div>
+          <div class="form-group">
+            <label>Описание</label>
+            <textarea name="description" id="hero-desc-input" rows="3"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Текст кнопки</label>
+              <input type="text" name="buttonText" id="hero-btn-text">
+            </div>
+            <div class="form-group">
+              <label>Ссылка кнопки</label>
+              <input type="text" name="buttonLink" id="hero-btn-link">
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">💾 Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="admin-section" id="section-about">
+      <div class="card">
+        <h2>Раздел «О нас»</h2>
+        <form id="about-form">
+          <div class="form-group">
+            <label>Заголовок</label>
+            <input type="text" name="title" id="about-title-input">
+          </div>
+          <div class="form-group">
+            <label>Описание</label>
+            <textarea name="description" id="about-desc-input" rows="4"></textarea>
+          </div>
+          <h3 style="margin:24px 0 16px">Характеристики (иконки)</h3>
+          <div id="features-editor"></div>
+          <button type="button" class="btn-secondary" onclick="addFeature()">+ Добавить характеристику</button>
+          <h3 style="margin:24px 0 16px">Статистика</h3>
+          <div id="stats-editor"></div>
+          <button type="button" class="btn-secondary" onclick="addStat()">+ Добавить показатель</button>
+          <br><br>
+          <button type="submit" class="btn-primary">💾 Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Tours -->
+    <section class="admin-section" id="section-tours">
+      <div class="card">
+        <div class="card-header">
+          <h2>Управление турами</h2>
+          <button class="btn-primary" onclick="showTourModal()">+ Добавить тур</button>
+        </div>
+        <div class="tours-list" id="tours-list"></div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="admin-section" id="section-gallery">
+      <div class="card">
+        <h2>Настройки галереи</h2>
+        <form id="gallery-meta-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Заголовок раздела</label>
+              <input type="text" name="title" id="gallery-title-input">
+            </div>
+            <div class="form-group">
+              <label>Подзаголовок</label>
+              <input type="text" name="subtitle" id="gallery-subtitle-input">
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">💾 Сохранить</button>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Загрузить фотографии</h2>
+        <div class="upload-zone" id="photo-upload-zone">
+          <div class="upload-icon">📷</div>
+          <p>Перетащите фото сюда или</p>
+          <label class="btn-primary upload-label">
+            Выбрать файлы
+            <input type="file" id="photo-input" multiple accept="image/*" style="display:none">
+          </label>
+          <p class="upload-hint">JPG, PNG, WEBP — до 10MB каждый</p>
+        </div>
+        <div class="upload-progress" id="upload-progress" style="display:none">
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <span id="progress-text">Загрузка...</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Фотографии (<span id="photo-count">0</span>)</h2>
+        <div class="photo-grid" id="photo-grid"></div>
+      </div>
+    </section>
+
+    <!-- Videos -->
+    <section class="admin-section" id="section-videos">
+      <div class="card">
+        <h2>Настройки видеораздела</h2>
+        <form id="videos-meta-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Заголовок раздела</label>
+              <input type="text" name="title" id="videos-title-input">
+            </div>
+            <div class="form-group">
+              <label>Подзаголовок</label>
+              <input type="text" name="subtitle" id="videos-subtitle-input">
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">💾 Сохранить</button>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Добавить видео</h2>
+        </div>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('youtube')">📺 YouTube ссылка</button>
+          <button class="tab" onclick="switchTab('upload')">📁 Загрузить видео</button>
+        </div>
+        <div id="tab-youtube" class="tab-content">
+          <form id="video-youtube-form">
+            <div class="form-group">
+              <label>Название видео</label>
+              <input type="text" name="title" required placeholder="Тур в Турцию 2024">
+            </div>
+            <div class="form-group">
+              <label>YouTube ссылка</label>
+              <input type="url" name="youtubeUrl" required placeholder="https://youtube.com/watch?v=...">
+            </div>
+            <div class="form-group">
+              <label>Описание (необязательно)</label>
+              <textarea name="description" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn-primary">+ Добавить</button>
+          </form>
+        </div>
+        <div id="tab-upload" class="tab-content" style="display:none">
+          <form id="video-upload-form" enctype="multipart/form-data">
+            <div class="form-group">
+              <label>Название видео</label>
+              <input type="text" name="title" required placeholder="Тур в Дубай 2024">
+            </div>
+            <div class="form-group">
+              <label>Видеофайл</label>
+              <input type="file" name="video" accept="video/*" required>
+            </div>
+            <div class="form-group">
+              <label>Описание (необязательно)</label>
+              <textarea name="description" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn-primary">📤 Загрузить</button>
+          </form>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Видео (<span id="video-count">0</span>)</h2>
+        <div class="videos-admin-list" id="videos-admin-list"></div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="admin-section" id="section-reviews">
+      <div class="card">
+        <div class="card-header">
+          <h2>Отзывы клиентов</h2>
+          <button class="btn-primary" onclick="showReviewModal()">+ Добавить отзыв</button>
+        </div>
+        <div class="reviews-admin-list" id="reviews-admin-list"></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="admin-section" id="section-contact">
+      <div class="card">
+        <h2>Контактная информация</h2>
+        <form id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Заголовок раздела</label>
+              <input type="text" name="title" id="contact-title-input">
+            </div>
+            <div class="form-group">
+              <label>Подзаголовок</label>
+              <input type="text" name="subtitle" id="contact-subtitle-input">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>📞 Телефон</label>
+              <input type="text" name="phone" id="contact-phone">
+            </div>
+            <div class="form-group">
+              <label>✉️ Email</label>
+              <input type="email" name="email" id="contact-email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>📍 Адрес</label>
+            <input type="text" name="address" id="contact-address">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>🕐 Время работы</label>
+              <input type="text" name="workHours" id="contact-hours">
+            </div>
+            <div class="form-group">
+              <label>💬 Telegram</label>
+              <input type="text" name="telegram" id="contact-telegram">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>📸 Instagram</label>
+            <input type="text" name="instagram" id="contact-instagram">
+          </div>
+          <button type="submit" class="btn-primary">💾 Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="admin-section" id="section-settings">
+      <div class="card">
+        <h2>Настройки сайта</h2>
+        <form id="settings-form">
+          <div class="form-group">
+            <label>Название сайта</label>
+            <input type="text" name="siteName" id="settings-sitename">
+          </div>
+          <div class="form-group">
+            <label>Новый пароль администратора</label>
+            <input type="password" name="adminPassword" id="settings-password" placeholder="Оставьте пустым чтобы не менять">
+          </div>
+          <button type="submit" class="btn-primary">💾 Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Tour Modal -->
+<div class="modal-overlay" id="tour-modal" style="display:none">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="tour-modal-title">Добавить тур</h3>
+      <button onclick="closeTourModal()" class="modal-close">✕</button>
+    </div>
+    <form id="tour-form" enctype="multipart/form-data">
+      <input type="hidden" id="tour-id">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Название тура</label>
+          <input type="text" name="title" required placeholder="Тур в Турцию">
+        </div>
+        <div class="form-group">
+          <label>Направление</label>
+          <input type="text" name="destination" placeholder="Анталья, Турция">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Длительность</label>
+          <input type="text" name="duration" placeholder="7 ночей">
+        </div>
+        <div class="form-group">
+          <label>Цена</label>
+          <input type="text" name="price" placeholder="от $599">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Описание</label>
+        <textarea name="description" rows="3" placeholder="Описание тура..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Что включено (через запятую)</label>
+        <input type="text" name="includedText" id="tour-included" placeholder="Перелёт, Отель 5*, Питание, Трансфер">
+      </div>
+      <div class="form-group">
+        <label>Фотография тура</label>
+        <input type="file" name="image" accept="image/*" id="tour-image-file">
+        <div id="tour-current-image" style="margin-top:8px"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="closeTourModal()" class="btn-secondary">Отмена</button>
+        <button type="submit" class="btn-primary">💾 Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Review Modal -->
+<div class="modal-overlay" id="review-modal" style="display:none">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="review-modal-title">Добавить отзыв</h3>
+      <button onclick="closeReviewModal()" class="modal-close">✕</button>
+    </div>
+    <form id="review-form">
+      <input type="hidden" id="review-id">
+      <div class="form-group">
+        <label>Имя клиента</label>
+        <input type="text" name="name" required placeholder="Алексей Смирнов">
+      </div>
+      <div class="form-group">
+        <label>Отзыв</label>
+        <textarea name="text" rows="4" required placeholder="Текст отзыва..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Рейтинг</label>
+        <select name="rating">
+          <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+          <option value="4">⭐⭐⭐⭐ (4)</option>
+          <option value="3">⭐⭐⭐ (3)</option>
+          <option value="2">⭐⭐ (2)</option>
+          <option value="1">⭐ (1)</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="closeReviewModal()" class="btn-secondary">Отмена</button>
+        <button type="submit" class="btn-primary">💾 Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>
