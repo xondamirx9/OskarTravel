@@ -1,2 +1,7 @@
 node_modules/
 public/uploads/
+.env
+data/marketing/
+data/tg_scan.json
+logs/
+tg_scan_session.session
