@@ -1,16 +1,20 @@
-# Полный деплой платформы (сайт + админка + маркетинговый агент) на Render.com в один клик.
-# Как использовать: https://render.com → New → Blueprint → выбрать этот репозиторий → Apply.
-# После деплоя добавьте секреты в Environment (ANTHROPIC_API_KEY, TELEGRAM_*, IG_*).
+# Полный деплой платформы (сайт + админка + маркетинговый агент) на Render.com.
+# Использование: https://render.com → New → Blueprint → выбрать репозиторий и ветку с этим файлом → Deploy.
+# После деплоя добавьте секреты в Environment сервиса (ANTHROPIC_API_KEY, TELEGRAM_*, IG_*).
+#
+# Бесплатный тариф: диск эфемерный (данные агента и загрузки живут до передеплоя)
+# и сервис засыпает после 15 минут без трафика. Для продакшена возьмите план
+# Starter и добавьте блок disk (см. комментарий внизу).
 services:
   - type: web
     name: oskartravel
     runtime: node
     plan: free
-    buildCommand: npm install && npx playwright install --with-deps chromium
+    buildCommand: npm install && npx playwright install chromium
     startCommand: node server.js
     envVars:
       - key: PUBLIC_BASE_URL
-        value: https://oskartravel.onrender.com # замените на выданный Render URL
+        value: https://oskartravel.onrender.com # замените на URL, который выдаст Render
       - key: ANTHROPIC_API_KEY
         sync: false
       - key: TELEGRAM_BOT_TOKEN
@@ -21,7 +25,9 @@ services:
         sync: false
       - key: IG_BUSINESS_ACCOUNT_ID
         sync: false
-    disk:
-      name: data
-      mountPath: /opt/render/project/src/data
-      sizeGB: 1
+# Для платного плана (постоянное хранение данных агента) раскомментируйте:
+#    plan: starter
+#    disk:
+#      name: data
+#      mountPath: /opt/render/project/src/data
+#      sizeGB: 1
