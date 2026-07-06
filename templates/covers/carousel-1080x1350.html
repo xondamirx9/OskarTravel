@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #F2ECDF; background: #0f1d31; position: relative;
+  }
+  .bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #182948, #0f1d31 60%, #1a2d47);
+    background-size: cover; background-position: center;
+  }
+  .bg.photo { background-image: url('{{photo}}'); }
+  .overlay { position: absolute; inset: 0; background: rgba(15,29,49,.78); }
+  .frame { position: absolute; inset: 0; padding: 80px 84px; display: flex; flex-direction: column; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-o { font-family: Georgia, serif; font-style: italic; font-size: 64px; color: #C56B2C; line-height: .9; }
+  .logo-text { font-size: 24px; font-weight: 700; letter-spacing: 6px; }
+  .slide-no {
+    font-size: 34px; font-weight: 800; color: #C56B2C;
+    border: 3px solid #C56B2C; border-radius: 999px; padding: 12px 30px;
+  }
+  .content { margin-top: auto; margin-bottom: auto; }
+  .accent-line { width: 120px; height: 7px; background: #C56B2C; border-radius: 4px; margin-bottom: 40px; }
+  .title { font-size: 84px; font-weight: 800; line-height: 1.08; letter-spacing: -1px; }
+  .text { margin-top: 44px; font-size: 46px; line-height: 1.42; font-weight: 400; color: #F2ECDF; opacity: .94; white-space: pre-line; }
+  .footer { display: flex; align-items: center; justify-content: space-between; }
+  .cta {
+    background: #C56B2C; color: #fff; font-size: 38px; font-weight: 800;
+    padding: 20px 44px; border-radius: 20px;
+  }
+  .swipe { font-size: 34px; opacity: .7; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="bg {{photoClass}}"></div>
+  <div class="overlay"></div>
+  <div class="frame">
+    <div class="top">
+      <div class="logo"><span class="logo-o">O</span><span class="logo-text">OSKAR TRAVEL</span></div>
+      <div class="slide-no" data-hide-empty>{{slideNo}}</div>
+    </div>
+    <div class="content">
+      <div class="accent-line"></div>
+      <div class="title" data-hide-empty>{{title}}</div>
+      <div class="text" data-hide-empty>{{slideText}}</div>
+    </div>
+    <div class="footer">
+      <div class="cta" data-hide-empty>{{cta}}</div>
+      <div class="swipe" data-hide-empty>{{swipe}}</div>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('[data-hide-empty]').forEach(el => {
+      if (!el.textContent.trim()) el.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
