@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1280px; height: 720px; overflow: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #F2ECDF; background: #0f1d31; position: relative;
+  }
+  .bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #182948, #0f1d31 60%, #1a2d47);
+    background-size: cover; background-position: center;
+  }
+  .bg.photo { background-image: url('{{photo}}'); }
+  .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(15,29,49,.94) 0%, rgba(15,29,49,.72) 42%, rgba(15,29,49,.18) 100%);
+  }
+  .frame { position: absolute; inset: 0; padding: 56px 64px; display: flex; flex-direction: column; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-o { font-family: Georgia, serif; font-style: italic; font-size: 60px; color: #C56B2C; line-height: .9; }
+  .logo-text { font-size: 22px; font-weight: 700; letter-spacing: 5px; }
+  .badge {
+    background: #C56B2C; color: #fff; font-size: 26px; font-weight: 800;
+    padding: 14px 30px; border-radius: 999px; white-space: nowrap;
+  }
+  .bottom { margin-top: auto; max-width: 760px; }
+  .accent-line { width: 110px; height: 6px; background: #C56B2C; border-radius: 4px; margin-bottom: 26px; }
+  .title { font-size: 68px; font-weight: 800; line-height: 1.06; letter-spacing: -1px; text-shadow: 0 3px 18px rgba(0,0,0,.5); }
+  .dest { margin-top: 16px; font-size: 30px; font-weight: 500; opacity: .92; }
+  .row { margin-top: 30px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .price {
+    background: #C56B2C; color: #fff; font-size: 40px; font-weight: 900;
+    padding: 14px 34px; border-radius: 16px; box-shadow: 0 8px 30px rgba(197,107,44,.4);
+  }
+  .cta { font-size: 26px; font-weight: 600; opacity: .95; border: 2px solid rgba(242,236,223,.55); padding: 14px 30px; border-radius: 16px; }
+</style>
+</head>
+<body>
+  <div class="bg {{photoClass}}"></div>
+  <div class="overlay"></div>
+  <div class="frame">
+    <div class="top">
+      <div class="logo"><span class="logo-o">O</span><span class="logo-text">OSKAR TRAVEL</span></div>
+      <div class="badge" data-hide-empty>{{badge}}</div>
+    </div>
+    <div class="bottom">
+      <div class="accent-line"></div>
+      <div class="title" data-hide-empty>{{title}}</div>
+      <div class="dest" data-hide-empty>{{destination}}{{durationSep}}{{duration}}</div>
+      <div class="row">
+        <div class="price" data-hide-empty>{{price}}</div>
+        <div class="cta" data-hide-empty>{{cta}}</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('[data-hide-empty]').forEach(el => {
+      if (!el.textContent.trim()) el.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

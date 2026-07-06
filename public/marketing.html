@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oskar Travel — Маркетинг</title>
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/marketing.css">
+</head>
+<body data-palette="#4C8FC9,#C56B2C">
+
+<!-- Login -->
+<div class="login-screen" id="login-screen" style="display:none">
+  <div class="login-box">
+    <div class="login-logo"><span class="logo-o">O</span><span>OSKAR TRAVEL</span></div>
+    <h2>Маркетинговый агент</h2>
+    <form id="login-form">
+      <input type="password" id="login-password" placeholder="Пароль" required>
+      <button type="submit" class="btn-primary">Войти</button>
+    </form>
+    <p class="login-error" id="login-error"></p>
+  </div>
+</div>
+
+<div class="admin-app" id="app" style="display:none">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="logo-o">O</span><span>МАРКЕТИНГ</span></div>
+    <nav class="sidebar-nav" id="nav">
+      <a href="#" class="nav-item active" data-section="calendar">📅 Календарь</a>
+      <a href="#" class="nav-item" data-section="queue">📝 Очередь модерации</a>
+      <a href="#" class="nav-item" data-section="analytics">📈 Аналитика</a>
+      <a href="#" class="nav-item" data-section="competitors">🔍 Конкуренты</a>
+      <a href="#" class="nav-item" data-section="reports">🧠 Отчёты агента</a>
+      <a href="#" class="nav-item" data-section="settings">⚙️ Настройки</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/admin.html" class="view-site">← Админка сайта</a>
+      <button onclick="logout()" class="logout-btn">Выйти</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <h1 class="topbar-title" id="topbar-title">Календарь</h1>
+      <div class="topbar-right">
+        <span class="status-pills" id="status-pills"></span>
+        <button class="btn-primary" id="btn-generate">✨ Сгенерировать план на неделю</button>
+      </div>
+    </div>
+    <div class="admin-content">
+      <section id="section-calendar" class="mk-section"></section>
+      <section id="section-queue" class="mk-section" style="display:none"></section>
+      <section id="section-analytics" class="mk-section" style="display:none"></section>
+      <section id="section-competitors" class="mk-section" style="display:none"></section>
+      <section id="section-reports" class="mk-section" style="display:none"></section>
+      <section id="section-settings" class="mk-section" style="display:none"></section>
+    </div>
+  </main>
+</div>
+
+<!-- Модалка поста -->
+<div class="mk-modal-backdrop" id="post-modal" style="display:none">
+  <div class="mk-modal" id="post-modal-body"></div>
+</div>
+<div class="mk-toast" id="toast" style="display:none"></div>
+
+<script src="/js/marketing.js"></script>
+</body>
+</html>

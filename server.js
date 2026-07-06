@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
@@ -285,7 +286,12 @@ app.post('/api/admin/upload/logo', authMiddleware, uploadPhoto.single('logo'), (
   res.json({ success: true, url: data.settings.logo });
 });
 
+// Маркетинговый агент: API + планировщик (см. docs/architecture.md)
+app.use('/api/marketing', require('./agent/api'));
+require('./agent/scheduler').startScheduler();
+
 app.listen(PORT, () => {
   console.log(`Oskar Travel server running on http://localhost:${PORT}`);
   console.log(`Admin panel: http://localhost:${PORT}/admin.html`);
+  console.log(`Marketing dashboard: http://localhost:${PORT}/marketing.html`);
 });
