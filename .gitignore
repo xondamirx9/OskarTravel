@@ -5,3 +5,4 @@ data/marketing/
 data/tg_scan.json
 logs/
 tg_scan_session.session
+dist/

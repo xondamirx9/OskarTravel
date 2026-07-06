@@ -1,0 +1,27 @@
+# Полный деплой платформы (сайт + админка + маркетинговый агент) на Render.com в один клик.
+# Как использовать: https://render.com → New → Blueprint → выбрать этот репозиторий → Apply.
+# После деплоя добавьте секреты в Environment (ANTHROPIC_API_KEY, TELEGRAM_*, IG_*).
+services:
+  - type: web
+    name: oskartravel
+    runtime: node
+    plan: free
+    buildCommand: npm install && npx playwright install --with-deps chromium
+    startCommand: node server.js
+    envVars:
+      - key: PUBLIC_BASE_URL
+        value: https://oskartravel.onrender.com # замените на выданный Render URL
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHANNEL_ID
+        sync: false
+      - key: IG_ACCESS_TOKEN
+        sync: false
+      - key: IG_BUSINESS_ACCOUNT_ID
+        sync: false
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
