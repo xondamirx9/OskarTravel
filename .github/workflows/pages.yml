@@ -2,7 +2,7 @@ name: Deploy demo to GitHub Pages
 
 on:
   push:
-    branches: [main, master, claude/travel-marketing-agent-7b6xll]
+    branches: [main, master, claude/video-photo-admin-panel-c0x9b3]
   workflow_dispatch:
 
 permissions:
